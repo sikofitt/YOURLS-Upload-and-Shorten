@@ -70,7 +70,9 @@ function my_upload_and_shorten_save_files() {
 	$my_uploaddir = SHARE_DIR;	// has to be defined in user/config.php like this: 
 					// define( 'SHARE_DIR', '/full/path/to/httpd/directory/' );	
 
-	$my_extension = pathinfo($_FILES['file_upload']['name'], PATHINFO_EXTENSION);
+	$my_extension
+	  = ( preg_match('/\.tar/', $_FILES['file_upload']['name']) ? 'tar.' : '' ) .
+	  pathinfo($_FILES['file_upload']['name'], PATHINFO_EXTENSION);
 	$my_filename = pathinfo($_FILES['file_upload']['name'], PATHINFO_FILENAME);
 
 	if(isset($_POST['randomize_filename'])) {
